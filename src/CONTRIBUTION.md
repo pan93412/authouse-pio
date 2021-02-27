@@ -1,4 +1,7 @@
+# Guide to contribute AuthouseLight
+
 ## Headers
+
 ```cpp
 /**
  * <Package Name>
@@ -9,9 +12,10 @@
 ```
 
 ## Package Name
+
 It should be formed in:
 
-```
+```plain
 Authouse.Communication.SerialCommunication
 ```
 
@@ -19,11 +23,12 @@ Authouse.Communication.SerialCommunication
 the sub one, so on.
 
 ## Include Guard
+
 The format should be:
 
 ```cpp
-#ifndef AH_sha1(<your package name>)
-#define AH_sha1(<your package name>)
+#ifndef AH_<your package name without Authouse. but all dots are replaced with _>
+#define AH_<your package name without Authouse. but all dots are replaced with _>
 // your code goes here
 #endif
 ```
@@ -32,8 +37,8 @@ For example, if your package name is `Authouse.Communication.SerialCommunication
 then the include guard should be:
 
 ```cpp
-#ifndef AH_185326bdfe0235150e5c6cc7116a4b311dc64228
-#define AH_185326bdfe0235150e5c6cc7116a4b311dc64228
+#ifndef AH_Communication_SerialCommunication
+#define AH_Communication_SerialCommunication
 // your code goes here
 #endif
 ```

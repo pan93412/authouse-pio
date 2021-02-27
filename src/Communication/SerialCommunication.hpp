@@ -6,8 +6,8 @@
  */
 #include <Arduino.h>
 #include <string>
-#ifndef AH_185326bdfe0235150e5c6cc7116a4b311dc64228
-#define AH_185326bdfe0235150e5c6cc7116a4b311dc64228
+#ifndef AH_Communication_SerialCommunication
+#define AH_Communication_SerialCommunication
 
 /**
  * The serial communication method for Authouse.

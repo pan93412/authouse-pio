@@ -7,8 +7,8 @@
 #include <Arduino.h>
 #include <vector>
 #include "AuthouseLight.hpp"
-#ifndef AH_8b37f5b3682544d7be873b4029019fa6cd371f36
-#define AH_8b37f5b3682544d7be873b4029019fa6cd371f36
+#ifndef AH_Modules_AuthouseLight_AuthouseLightPool
+#define AH_Modules_AuthouseLight_AuthouseLightPool
 
 class AuthouseLightPool {
     private:
@@ -16,12 +16,14 @@ class AuthouseLightPool {
         AuthouseLightPool* instance;
         AuthouseLightPool();
 
+        AuthouseLight** _query(int pin);
+
     public:
         AuthouseLightPool* getInstance();
 
         AuthouseLightPool* add(AuthouseLight* authouseLight);
         AuthouseLightPool* add(int pin);
-        AuthouseLightPool* remove(int pin);
+        AuthouseLightPool* remove(int pin, bool delete_detached_instance = true);
         AuthouseLight* query(int pin);
         
         AuthouseLightPool* turnOnAll();
