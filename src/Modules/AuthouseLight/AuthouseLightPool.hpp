@@ -19,7 +19,7 @@ class AuthouseLightPool {
         AuthouseLight** _query(int pin);
 
     public:
-        AuthouseLightPool* getInstance();
+        static AuthouseLightPool* getInstance();
 
         AuthouseLightPool* add(AuthouseLight* authouseLight);
         AuthouseLightPool* add(int pin);
