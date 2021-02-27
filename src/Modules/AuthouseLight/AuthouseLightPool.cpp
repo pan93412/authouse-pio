@@ -15,7 +15,7 @@ THIS* THIS::add(AuthouseLight* authouseLight) {
 }
 
 THIS* THIS::add(int pin) {
-    AuthouseLight* lightInstance = new AuthouseLight(pin);
+    AuthouseLight* lightInstance = (new AuthouseLight(pin))->initiate();
     lights.push_back(lightInstance);
     return instance;
 }
