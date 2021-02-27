@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <vector>
-#include "src/Modules/AuthouseLight/AuthouseLight.hpp"
+#include "Modules/AuthouseLight/AuthouseLight.hpp"
 // #include "Communication/SerialCommunication.hpp";
 std::vector<AuthouseLight*> pool;
 
