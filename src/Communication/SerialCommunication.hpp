@@ -1,6 +1,6 @@
 /**
  * Authouse.Communication.SerialCommunication
- *   The serial communication method for Authouse.
+ *   @brief The serial communication method for Authouse.
  *   @author pan93412
  *   @date 2020-12-14
  */

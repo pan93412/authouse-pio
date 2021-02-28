@@ -1,6 +1,6 @@
 /**
  * Authouse.Modules.AuthouseLight.AuthouseLight
- *   Authouse Light.
+ *   @brief Authouse Light.
  *   @author pan93412
  *   @date 2020-12-16
  */

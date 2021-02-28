@@ -1,6 +1,6 @@
 /**
  * Authouse.Modules.AuthouseLight.AuthouseLightPool
- *   Authouse Light Pool.
+ *   @brief Authouse Light Pool.
  *   @author pan93412
  *   @date 2020-12-16
  */

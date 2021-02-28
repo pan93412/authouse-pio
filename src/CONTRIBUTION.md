@@ -5,7 +5,7 @@
 ```cpp
 /**
  * <Package Name>
- *   <Brief description of your package>
+ *   @brief <Brief description of your package>
  *   @author <Your name>
  *   @date YYYY-MM-DD (e.g. 2020-12-14)
  */

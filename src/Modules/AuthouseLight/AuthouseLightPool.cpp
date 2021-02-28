@@ -1,3 +1,10 @@
+/**
+ * Authouse.Modules.AuthouseLight.AuthouseLightPool
+ *   @brief Authouse Light Pool.
+ *   @author pan93412
+ *   @date 2021-2-28
+ */
+
 #include "AuthouseLightPool.hpp"
 #define THIS AuthouseLightPool
 
