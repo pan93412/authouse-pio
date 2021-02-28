@@ -17,10 +17,19 @@ void setup() {
 }
 
 void loop() {
-  serialCommunication->postMessage("Turn on all!");
-  pool->turnOnAll();
-  delay(700);
-  serialCommunication->postMessage("Turn off all!");
-  pool->turnOffAll();
-  delay(700);
+  if (serialCommunication->isAvailableForReading()) {
+    char read;
+    serialCommunication->readRequestChar(&read);
+
+    switch (read) {
+      case 'e':
+        serialCommunication->postMessage("Turn on all!");
+        pool->turnOnAll();
+        break;
+      case 'd':
+        serialCommunication->postMessage("Turn off all!");
+        pool->turnOffAll();
+        break;
+    }
+  }
 }
