@@ -4,15 +4,15 @@
 #include "Modules/AuthouseLight/AuthouseLightPool.hpp"
 #include "Communication/SerialCommunication.hpp"
 
+AuthouseLight light(LED_BUILTIN);
 AuthouseLightPool* pool;
 SerialCommunication* serialCommunication;
 
 void setup() {
   // put your setup code here, to run once:
   serialCommunication = SerialCommunication::getInstance();
-  AuthouseLight* light1 = (new AuthouseLight(LED_BUILTIN))->initiate();
   pool = AuthouseLightPool::getInstance();
-  pool->add(light1);
+  pool->add(light.initiate());
   serialCommunication->initiate();
 }
 
