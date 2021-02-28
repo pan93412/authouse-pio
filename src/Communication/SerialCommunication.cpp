@@ -6,7 +6,9 @@
  */
 #include "SerialCommunication.hpp"
 
-SerialCommunication::SerialCommunication(int port) {
+SerialCommunication* SerialCommunication::instance = nullptr;
+
+SerialCommunication::SerialCommunication(unsigned long port) {
     this->port = port;
 }
 
@@ -22,12 +24,12 @@ SerialCommunication* SerialCommunication::initiate() {
  * Get the instance of SerialCommunication.
  * 
  * Note that the default port of SerialCommunication is
- * 115200. To change, use `SerialCommunication::setPort()`.
+ * 9600. To change, use `SerialCommunication::setPort()`.
  */
 SerialCommunication* SerialCommunication::getInstance() {
     // If we didn't create such an instance before.
     if (!instance) {
-        instance = new SerialCommunication(115200);
+        instance = new SerialCommunication(9600);
     }
 
     return instance;
@@ -36,7 +38,7 @@ SerialCommunication* SerialCommunication::getInstance() {
 /**
  * Set the port of the serial to send.
  */
-SerialCommunication* SerialCommunication::setPort(int port) {
+SerialCommunication* SerialCommunication::setPort(unsigned long port) {
     this->port = port;
     return this;
 };
@@ -44,14 +46,24 @@ SerialCommunication* SerialCommunication::setPort(int port) {
 /**
  * Post message ended with '\n' to the specified serial.
  */
-SerialCommunication* SerialCommunication::postMessage(std::string message) {
-    if (isAvailable()) Serial.println(message.c_str());
+SerialCommunication* SerialCommunication::postMessage(String message) {
+    Serial.println(message);
+    Serial.flush();
     return this;
 }
 
 /**
- * Is the serial available?
+ * Read messages from the specified serial.
  */
-bool SerialCommunication::isAvailable() {
-    return Serial.available() && Serial.availableForWrite();
+SerialCommunication* SerialCommunication::readRequest(String* buf) {
+    *buf = Serial.readString();
+    return this;
+}
+
+/**
+ * Read messages until reached <until> from the specified serial.
+ */
+SerialCommunication* SerialCommunication::readRequest(String* buf, char until) {
+    *buf = Serial.readStringUntil(until);
+    return this;
 }

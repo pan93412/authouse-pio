@@ -5,7 +5,6 @@
  *   @date 2020-12-14
  */
 #include <Arduino.h>
-#include <string>
 #ifndef AH_Communication_SerialCommunication
 #define AH_Communication_SerialCommunication
 
@@ -17,15 +16,17 @@
 class SerialCommunication {
     private:
         static SerialCommunication* instance;
-        int port;
+        unsigned long port;
 
-        SerialCommunication(int port);
+        SerialCommunication(unsigned long port);
 
     public:
         SerialCommunication* initiate();
         static SerialCommunication* getInstance();
-        SerialCommunication* setPort(int port);
-        SerialCommunication* postMessage(std::string message);
+        SerialCommunication* setPort(unsigned long port);
+        SerialCommunication* postMessage(String message);
+        SerialCommunication* readRequest(String* buf);
+        SerialCommunication* readRequest(String* buf, char until);
         bool isAvailable();
 };
 
