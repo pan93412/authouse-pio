@@ -1,6 +1,10 @@
 #include "AuthouseLightPool.hpp"
 #define THIS AuthouseLightPool
 
+THIS* THIS::instance = nullptr;
+
+THIS::THIS() {}
+
 THIS* THIS::getInstance() {
     if (!instance) {
         instance = new AuthouseLightPool();
@@ -15,7 +19,7 @@ THIS* THIS::add(AuthouseLight* authouseLight) {
 }
 
 THIS* THIS::add(int pin) {
-    AuthouseLight* lightInstance = (new AuthouseLight(pin))->initiate();
+    AuthouseLight* lightInstance = new AuthouseLight(pin);
     lights.push_back(lightInstance);
     return instance;
 }
@@ -33,7 +37,7 @@ AuthouseLight* THIS::query(int pin) {
     return nullptr;
 }
 
-THIS* THIS::remove(int pin, bool delete_detached_instance = true) {
+THIS* THIS::remove(int pin, bool delete_detached_instance /*=true*/) {
     AuthouseLight** lightInstance = this->_query(pin);
     if (lightInstance != nullptr) {
         lights.erase(lightInstance);
@@ -54,15 +58,6 @@ THIS* THIS::turnOnAll() {
 THIS* THIS::turnOffAll() {
     for (auto i = lights.begin(); i < lights.end(); i++) {
         (*i)->deactivate();
-    }
-
-    return this;
-}
-
-THIS* THIS::remove(int pin) {
-    AuthouseLight** lightInstance = this->_query(pin);
-    if (lightInstance != nullptr) {
-        lights.erase(lightInstance);
     }
 
     return this;

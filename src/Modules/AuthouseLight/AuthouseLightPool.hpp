@@ -13,7 +13,7 @@
 class AuthouseLightPool {
     private:
         std::vector<AuthouseLight*> lights;
-        AuthouseLightPool* instance;
+        static AuthouseLightPool* instance;
         AuthouseLightPool();
 
         AuthouseLight** _query(int pin);
