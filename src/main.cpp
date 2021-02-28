@@ -30,6 +30,13 @@ void loop() {
         serialCommunication->postMessage("Turn off all!");
         pool->turnOffAll();
         break;
+      case 'p':
+        String read;
+
+        serialCommunication->postMessage("Start receiving inputs.");
+        serialCommunication->readRequest(&read);
+        serialCommunication->postMessage(read);
+        break;
     }
   }
 }
