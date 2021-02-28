@@ -5,31 +5,32 @@
  *   @date 2020-12-14
  */
 #include "SerialCommunication.hpp"
+#define THIS SerialCommunication
 
-SerialCommunication* SerialCommunication::instance = nullptr;
+THIS* THIS::instance = nullptr;
 
-SerialCommunication::SerialCommunication(unsigned long port) {
+THIS::THIS(unsigned long port) {
     this->port = port;
 }
 
 /**
  * Initiate the serial connection.
  */
-SerialCommunication* SerialCommunication::initiate() {
+THIS* THIS::initiate() {
     Serial.begin(this->port);
     return this;
 }
 
 /**
- * Get the instance of SerialCommunication.
+ * Get the instance of THIS.
  * 
- * Note that the default port of SerialCommunication is
- * 9600. To change, use `SerialCommunication::setPort()`.
+ * Note that the default port of THIS is
+ * 9600. To change, use `THIS::setPort()`.
  */
-SerialCommunication* SerialCommunication::getInstance() {
+THIS* THIS::getInstance() {
     // If we didn't create such an instance before.
     if (!instance) {
-        instance = new SerialCommunication(9600);
+        instance = new THIS(9600);
     }
 
     return instance;
@@ -38,7 +39,7 @@ SerialCommunication* SerialCommunication::getInstance() {
 /**
  * Set the port of the serial to send.
  */
-SerialCommunication* SerialCommunication::setPort(unsigned long port) {
+THIS* THIS::setPort(unsigned long port) {
     this->port = port;
     return this;
 };
@@ -46,7 +47,7 @@ SerialCommunication* SerialCommunication::setPort(unsigned long port) {
 /**
  * Post message ended with '\n' to the specified serial.
  */
-SerialCommunication* SerialCommunication::postMessage(String message) {
+THIS* THIS::postMessage(String message) {
     Serial.println(message);
     Serial.flush();
     return this;
@@ -55,7 +56,7 @@ SerialCommunication* SerialCommunication::postMessage(String message) {
 /**
  * Read messages from the specified serial.
  */
-SerialCommunication* SerialCommunication::readRequest(String* buf) {
+THIS* THIS::readRequest(String* buf) {
     *buf = Serial.readString();
     return this;
 }
@@ -63,7 +64,25 @@ SerialCommunication* SerialCommunication::readRequest(String* buf) {
 /**
  * Read messages until reached <until> from the specified serial.
  */
-SerialCommunication* SerialCommunication::readRequest(String* buf, char until) {
+THIS* THIS::readRequest(String* buf, char until) {
     *buf = Serial.readStringUntil(until);
     return this;
 }
+
+/**
+ * Read a char from the specified serial.
+ */
+THIS* THIS::readRequestChar(char* buf) {
+    *buf = Serial.read();
+    return this;
+}
+
+bool THIS::isAvailableForReading() {
+    return Serial.available();
+}
+
+bool THIS::isAvailableForWriting() {
+    return Serial.availableForWrite();
+}
+
+#undef THIS

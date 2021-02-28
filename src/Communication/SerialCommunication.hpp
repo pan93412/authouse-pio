@@ -27,7 +27,9 @@ class SerialCommunication {
         SerialCommunication* postMessage(String message);
         SerialCommunication* readRequest(String* buf);
         SerialCommunication* readRequest(String* buf, char until);
-        bool isAvailable();
+        SerialCommunication* readRequestChar(char* buf);
+        bool isAvailableForReading();
+        bool isAvailableForWriting();
 };
 
 #endif
