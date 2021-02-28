@@ -5,14 +5,14 @@
  *   @date 2020-12-16
  */
 #include <Arduino.h>
-#include <vector>
+#include <etl/vector.h>
 #include "AuthouseLight.hpp"
 #ifndef AH_Modules_AuthouseLight_AuthouseLightPool
 #define AH_Modules_AuthouseLight_AuthouseLightPool
 
 class AuthouseLightPool {
     private:
-        std::vector<AuthouseLight*> lights;
+        etl::vector<AuthouseLight*, 10> lights;
         static AuthouseLightPool* instance;
         AuthouseLightPool();
 
