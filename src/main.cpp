@@ -1,27 +1,26 @@
 #include <Arduino.h>
 #include <vector>
 #include "Modules/AuthouseLight/AuthouseLight.hpp"
-// #include "Communication/SerialCommunication.hpp";
-std::vector<AuthouseLight*> pool;
+#include "Modules/AuthouseLight/AuthouseLightPool.hpp"
+#include "Communication/SerialCommunication.hpp"
+
+AuthouseLightPool* pool;
+SerialCommunication* serialCommunication;
 
 void setup() {
   // put your setup code here, to run once:
-  AuthouseLight* light1 = (new AuthouseLight(32))->initiate();
-  AuthouseLight* light2 = (new AuthouseLight(33))->initiate();
-  AuthouseLight* light3 = (new AuthouseLight(25))->initiate();
-  pool.push_back(light1);
-  pool.push_back(light2);
-  pool.push_back(light3);
+  serialCommunication = SerialCommunication::getInstance();
+  AuthouseLight* light1 = (new AuthouseLight(LED_BUILTIN))->initiate();
+  pool = AuthouseLightPool::getInstance();
+  pool->add(light1);
+  serialCommunication->initiate();
 }
 
 void loop() {
-  for (auto el: pool) {
-    el->activate();
-    delay(100);
-  }
-
-  for (auto el: pool) {
-    el->deactivate();
-    delay(100);
-  }
+  serialCommunication->postMessage("Turn on all!");
+  pool->turnOnAll();
+  delay(700);
+  serialCommunication->postMessage("Turn off all!");
+  pool->turnOffAll();
+  delay(700);
 }
