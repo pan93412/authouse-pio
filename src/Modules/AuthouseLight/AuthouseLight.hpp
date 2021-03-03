@@ -13,12 +13,12 @@ class AuthouseLight {
     uint8_t pin;
 
   public:
-    AuthouseLight(uint8_t pin = 0);
-    AuthouseLight *initiate();
-    AuthouseLight *activate();
-    AuthouseLight *deactivate();
-    AuthouseLight *setPin(uint8_t pin);
-    uint8_t getPin();
+    explicit AuthouseLight(uint8_t pin) noexcept;
+    AuthouseLight *initiate() noexcept;
+    AuthouseLight *activate() noexcept;
+    AuthouseLight *deactivate() noexcept;
+    AuthouseLight *setPin(uint8_t pin) noexcept;
+    uint8_t getPin() const noexcept;
 };
 
 #endif

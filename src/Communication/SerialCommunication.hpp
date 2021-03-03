@@ -5,6 +5,7 @@
  *   @date 2020-12-14
  */
 #include <Arduino.h>
+#include <stdint.h>
 #ifndef AH_Communication_SerialCommunication
 #define AH_Communication_SerialCommunication
 
@@ -15,21 +16,21 @@
  */
 class SerialCommunication {
   private:
-    static SerialCommunication *instance;
-    unsigned long baud;
+    static SerialCommunication* instance;
+    uint64_t baud;
 
-    SerialCommunication(unsigned long baud);
+    explicit SerialCommunication(uint64_t baud) noexcept;
 
   public:
-    SerialCommunication *initiate();
-    static SerialCommunication *getInstance();
-    SerialCommunication *setBaud(unsigned long baud);
-    SerialCommunication *postMessage(String message);
-    SerialCommunication *readRequest(String *buf);
-    SerialCommunication *readRequest(String *buf, char until);
-    SerialCommunication *readRequestChar(char *buf);
-    bool isAvailableForReading();
-    bool isAvailableForWriting();
+    SerialCommunication *initiate() noexcept;
+    static SerialCommunication *getInstance() noexcept;
+    SerialCommunication *setBaud(uint64_t baud) noexcept;
+    SerialCommunication *postMessage(const String& message) noexcept; 
+    SerialCommunication *readRequest(String *buf) noexcept;
+    SerialCommunication *readRequest(String *buf, char until) noexcept;
+    SerialCommunication *readRequestChar(int *buf) noexcept;
+    static bool isAvailableForReading() noexcept;
+    static bool isAvailableForWriting() noexcept;
 };
 
 #endif

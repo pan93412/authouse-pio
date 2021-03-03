@@ -6,70 +6,73 @@
  */
 
 #include "AuthouseLightPool.hpp"
-#define THIS AuthouseLightPool
 
-THIS *THIS::instance = nullptr;
+AuthouseLightPool *AuthouseLightPool::instance = nullptr;
 
-THIS::THIS() {}
+AuthouseLightPool::AuthouseLightPool() = default;
 
-THIS *THIS::getInstance() {
-    if (!instance) {
+AuthouseLightPool *AuthouseLightPool::getInstance() {  // NOLINT(readability-convert-member-functions-to-static)
+    if (instance == nullptr) {
         instance = new AuthouseLightPool();
     }
 
     return instance;
 }
 
-THIS *THIS::add(AuthouseLight *authouseLight) {
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
+AuthouseLightPool *AuthouseLightPool::add(AuthouseLight *authouseLight) {
     lights.push_back(authouseLight);
     return instance;
 }
 
-THIS *THIS::add(int pin) {
-    AuthouseLight *lightInstance = new AuthouseLight(pin);
+AuthouseLightPool *AuthouseLightPool::add(int pin) {
+    auto *lightInstance = new AuthouseLight(pin);
     return this->add(lightInstance);
 }
 
-AuthouseLight **THIS::_query(int pin) {
-    for (auto i = lights.begin(); i < lights.end(); i++) {
-        if ((*i)->getPin() == pin)
+// NOLINTNEXTLINE(readability-convert-member-functions-to-static)
+AuthouseLight **AuthouseLightPool::_query(int pin) {
+    for (auto *i = lights.begin(); i < lights.end(); i++) {
+        if ((*i)->getPin() == pin) {
             return i;
+        }
     }
     return nullptr;
 }
 
-AuthouseLight *THIS::query(int pin) {
+AuthouseLight *AuthouseLightPool::query(int pin) {
     AuthouseLight **lightInstance = this->_query(pin);
-    if (lightInstance)
+    if (lightInstance != nullptr) {
         return *lightInstance;
+    }
     return nullptr;
 }
 
-THIS *THIS::remove(int pin, bool delete_detached_instance /*=true*/) {
+AuthouseLightPool *AuthouseLightPool::remove(int pin, bool delete_detached_instance /*=true*/) {
     AuthouseLight **lightInstance = this->_query(pin);
     if (lightInstance != nullptr) {
         lights.erase(lightInstance);
-        if (*lightInstance != nullptr && delete_detached_instance)
+        if (*lightInstance != nullptr && delete_detached_instance) {
             delete *lightInstance;
+        }
     }
 
     return this;
 }
 
-THIS *THIS::turnOnAll() {
-    for (auto i = lights.begin(); i < lights.end(); i++) {
+AuthouseLightPool *AuthouseLightPool::turnOnAll() {
+    for (auto *i = lights.begin(); i < lights.end(); i++) {
         (*i)->activate();
     }
 
     return this;
 }
 
-THIS *THIS::turnOffAll() {
-    for (auto i = lights.begin(); i < lights.end(); i++) {
+AuthouseLightPool *AuthouseLightPool::turnOffAll() {
+    for (auto *i = lights.begin(); i < lights.end(); i++) {
         (*i)->deactivate();
     }
 
     return this;
 }
 
-#undef THIS

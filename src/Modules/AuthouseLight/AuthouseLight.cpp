@@ -5,30 +5,27 @@
  *   @date 2020-12-16
  */
 #include "AuthouseLight.hpp"
-#define THIS AuthouseLight
 
-THIS::THIS(uint8_t pin) { this->pin = pin; }
+AuthouseLight::AuthouseLight(uint8_t pin) { this->pin = pin; }
 
-THIS *THIS::initiate() {
+AuthouseLight *AuthouseLight::initiate() {
     pinMode(this->pin, OUTPUT);
     return this;
 }
 
-THIS *THIS::activate() {
+AuthouseLight *AuthouseLight::activate() {
     digitalWrite(this->pin, HIGH);
     return this;
 }
 
-THIS *THIS::deactivate() {
+AuthouseLight *AuthouseLight::deactivate() {
     digitalWrite(this->pin, LOW);
     return this;
 }
 
-THIS *THIS::setPin(uint8_t pin) {
+AuthouseLight *AuthouseLight::setPin(uint8_t pin) {
     this->pin = pin;
     return this;
 }
 
-uint8_t THIS::getPin() { return this->pin; }
-
-#undef THIS
+uint8_t AuthouseLight::getPin() const { return this->pin; }

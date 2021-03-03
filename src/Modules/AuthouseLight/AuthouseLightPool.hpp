@@ -10,24 +10,26 @@
 #ifndef AH_Modules_AuthouseLight_AuthouseLightPool
 #define AH_Modules_AuthouseLight_AuthouseLightPool
 
+const int LIGHTS_SIZE = 10;
+
 class AuthouseLightPool {
   private:
-    etl::vector<AuthouseLight *, 10> lights;
+    etl::vector<AuthouseLight *, LIGHTS_SIZE> lights;
     static AuthouseLightPool *instance;
     AuthouseLightPool();
 
-    AuthouseLight **_query(int pin);
+    AuthouseLight **_query(int pin) noexcept;
 
   public:
-    static AuthouseLightPool *getInstance();
+    static AuthouseLightPool *getInstance() noexcept;
 
-    AuthouseLightPool *add(AuthouseLight *authouseLight);
-    AuthouseLightPool *add(int pin);
-    AuthouseLightPool *remove(int pin, bool delete_detached_instance = true);
-    AuthouseLight *query(int pin);
+    AuthouseLightPool *add(AuthouseLight *authouseLight) noexcept;
+    AuthouseLightPool *add(int pin) noexcept;
+    AuthouseLightPool *remove(int pin, bool delete_detached_instance = true) noexcept;
+    AuthouseLight *query(int pin) noexcept;
 
-    AuthouseLightPool *turnOnAll();
-    AuthouseLightPool *turnOffAll();
+    AuthouseLightPool *turnOnAll() noexcept;
+    AuthouseLightPool *turnOffAll() noexcept;
 };
 
 #endif
