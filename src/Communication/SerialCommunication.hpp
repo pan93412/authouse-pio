@@ -10,26 +10,26 @@
 
 /**
  * The serial communication method for Authouse.
- * 
+ *
  * It is a singleton class: get the instance with `getInstance()`.
  */
 class SerialCommunication {
-    private:
-        static SerialCommunication* instance;
-        unsigned long baud;
+  private:
+    static SerialCommunication *instance;
+    unsigned long baud;
 
-        SerialCommunication(unsigned long baud);
+    SerialCommunication(unsigned long baud);
 
-    public:
-        SerialCommunication* initiate();
-        static SerialCommunication* getInstance();
-        SerialCommunication* setBaud(unsigned long baud);
-        SerialCommunication* postMessage(String message);
-        SerialCommunication* readRequest(String* buf);
-        SerialCommunication* readRequest(String* buf, char until);
-        SerialCommunication* readRequestChar(char* buf);
-        bool isAvailableForReading();
-        bool isAvailableForWriting();
+  public:
+    SerialCommunication *initiate();
+    static SerialCommunication *getInstance();
+    SerialCommunication *setBaud(unsigned long baud);
+    SerialCommunication *postMessage(String message);
+    SerialCommunication *readRequest(String *buf);
+    SerialCommunication *readRequest(String *buf, char until);
+    SerialCommunication *readRequestChar(char *buf);
+    bool isAvailableForReading();
+    bool isAvailableForWriting();
 };
 
 #endif

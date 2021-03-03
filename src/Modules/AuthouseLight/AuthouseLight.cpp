@@ -7,32 +7,28 @@
 #include "AuthouseLight.hpp"
 #define THIS AuthouseLight
 
-THIS::THIS(uint8_t pin) {
-    this->pin = pin;
-}
+THIS::THIS(uint8_t pin) { this->pin = pin; }
 
-THIS* THIS::initiate() {
+THIS *THIS::initiate() {
     pinMode(this->pin, OUTPUT);
     return this;
 }
 
-THIS* THIS::activate() {
+THIS *THIS::activate() {
     digitalWrite(this->pin, HIGH);
     return this;
 }
 
-THIS* THIS::deactivate() {
+THIS *THIS::deactivate() {
     digitalWrite(this->pin, LOW);
     return this;
 }
 
-THIS* THIS::setPin(uint8_t pin) {
+THIS *THIS::setPin(uint8_t pin) {
     this->pin = pin;
     return this;
 }
 
-uint8_t THIS::getPin() {
-    return this->pin;
-}
+uint8_t THIS::getPin() { return this->pin; }
 
 #undef THIS
