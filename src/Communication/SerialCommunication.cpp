@@ -9,38 +9,38 @@
 
 THIS* THIS::instance = nullptr;
 
-THIS::THIS(unsigned long port) {
-    this->port = port;
+THIS::THIS(unsigned long baud) {
+    this->baud = baud;
 }
 
 /**
  * Initiate the serial connection.
  */
 THIS* THIS::initiate() {
-    Serial.begin(this->port);
+    Serial.begin(this->baud);
     return this;
 }
 
 /**
- * Get the instance of THIS.
+ * Get the instance of SerialCommunication.
  * 
- * Note that the default port of THIS is
- * 9600. To change, use `THIS::setPort()`.
+ * Note that the default baud is 96000.
+ * To change, use `SerialCommunication::setRate()`.
  */
 THIS* THIS::getInstance() {
     // If we didn't create such an instance before.
     if (!instance) {
-        instance = new THIS(9600);
+        instance = new THIS(96000);
     }
 
     return instance;
 }
 
 /**
- * Set the port of the serial to send.
+ * Set the baud of the serial to send.
  */
-THIS* THIS::setPort(unsigned long port) {
-    this->port = port;
+THIS* THIS::setBaud(unsigned long baud) {
+    this->baud = baud;
     return this;
 };
 

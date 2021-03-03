@@ -16,14 +16,14 @@
 class SerialCommunication {
     private:
         static SerialCommunication* instance;
-        unsigned long port;
+        unsigned long baud;
 
-        SerialCommunication(unsigned long port);
+        SerialCommunication(unsigned long baud);
 
     public:
         SerialCommunication* initiate();
         static SerialCommunication* getInstance();
-        SerialCommunication* setPort(unsigned long port);
+        SerialCommunication* setBaud(unsigned long baud);
         SerialCommunication* postMessage(String message);
         SerialCommunication* readRequest(String* buf);
         SerialCommunication* readRequest(String* buf, char until);
