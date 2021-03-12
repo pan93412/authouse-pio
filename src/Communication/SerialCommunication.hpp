@@ -26,6 +26,7 @@ class SerialCommunication {
     static SerialCommunication *getInstance() noexcept;
     SerialCommunication *setBaud(uint64_t baud) noexcept;
     SerialCommunication *postMessage(const String& message) noexcept; 
+    SerialCommunication *postMessageNoNl(const String& message) noexcept;
     SerialCommunication *readRequest(String *buf) noexcept;
     SerialCommunication *readRequest(String *buf, char until) noexcept;
     SerialCommunication *readRequestChar(int *buf) noexcept;

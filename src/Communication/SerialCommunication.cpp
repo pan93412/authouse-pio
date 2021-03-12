@@ -6,7 +6,7 @@
  */
 #include "SerialCommunication.hpp"
 
-const uint64_t DEFAULT_BAUD = 96000;
+const uint64_t DEFAULT_BAUD = 9600;
 
 SerialCommunication *SerialCommunication::instance = nullptr;
 
@@ -23,8 +23,8 @@ SerialCommunication *SerialCommunication::initiate() {
 /**
  * Get the instance of SerialCommunication.
  *
- * Note that the default baud is 96000.
- * To change, use `SerialCommunication::setRate()`.
+ * Note that the default baud is @see DEFAULT_BAUD.
+ * To change, use `SerialCommunication::setBaud()`.
  */
 SerialCommunication *SerialCommunication::getInstance() { // NOLINT(readability-convert-member-functions-to-static)
     // If we didn't create such an instance before.
@@ -48,6 +48,15 @@ SerialCommunication *SerialCommunication::setBaud(uint64_t baud) {
  */
 SerialCommunication *SerialCommunication::postMessage(const String& message) {
     Serial.println(message);
+    Serial.flush();
+    return this;
+};
+
+/**
+ * Post message ended with '\n' to the specified serial.
+ */
+SerialCommunication *SerialCommunication::postMessageNoNl(const String& message) {
+    Serial.print(message);
     Serial.flush();
     return this;
 }
