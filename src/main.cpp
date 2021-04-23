@@ -14,16 +14,23 @@ Dependencies *dependencies;
 void setup() {
     // put your setup code here, to run once:
     dependencies = new Dependencies();
+
+    // serial communication
     dependencies->serialCommunication = SerialCommunication::getInstance();
+    dependencies->serialCommunication->initiate();
+
+    // light pool
     dependencies->pool = AuthouseLightPool::getInstance();
+    dependencies->pool->add((new AuthouseLight{LED_BUILTIN})->initiate());
+
+    // DHT11
     dependencies->tempInfo = new TemperatureInfo();
     dependencies->dht11 = new DHT11Temp(DHT11_PORT, dependencies->tempInfo);
+    dependencies->dht11->begin();
+
+    // PM2.5
     dependencies->pm25Info = new SHGP2YSensorInfo();
     dependencies->pm25 = new SHGP2YSensor(SHGP2Y_PORT, dependencies->pm25Info);
-
-    dependencies->pool->add((new AuthouseLight{LED_BUILTIN})->initiate());
-    dependencies->serialCommunication->initiate();
-    dependencies->dht11->begin();
     dependencies->pm25->begin();
 }
 
