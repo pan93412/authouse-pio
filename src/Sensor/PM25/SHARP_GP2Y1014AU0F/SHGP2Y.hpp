@@ -11,6 +11,7 @@
 
 struct SHGP2YSensorInfo : PM25Info {
     bool working = false;
+    float raw;
 };
 
 class SHGP2YSensor : PM25<SHGP2YSensor> {

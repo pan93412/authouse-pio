@@ -38,6 +38,8 @@ void get_pm25_data(SHGP2YSensor* sensor, SerialCommunication *serialCommunicatio
     serialCommunication->postMessageNoNl(data->working ? "true" : "false");
     serialCommunication->postMessageNoNl(", \"value\": ");
     serialCommunication->postMessageNoNl(String(data->value));
+    serialCommunication->postMessageNoNl(", \"raw_value\": ");
+    serialCommunication->postMessageNoNl(String(data->raw));
     serialCommunication->postMessage("}");
 }
 
