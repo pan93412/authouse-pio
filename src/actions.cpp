@@ -32,6 +32,15 @@ void test_input_output(SerialCommunication *serialCommunication) {
     serialCommunication->postMessage(read);
 };
 
+void get_pm25_data(SHGP2YSensor* sensor, SerialCommunication *serialCommunication, SHGP2YSensorInfo* data) {
+    sensor->update();
+    serialCommunication->postMessageNoNl("{\"working\": ");
+    serialCommunication->postMessageNoNl(data->working ? "true" : "false");
+    serialCommunication->postMessageNoNl(", \"value\": ");
+    serialCommunication->postMessageNoNl(String(data->value));
+    serialCommunication->postMessage("}");
+}
+
 void action_loop(int input, Dependencies* dependencies) {
     switch (input) { // received...
         case 'e':
@@ -43,6 +52,8 @@ void action_loop(int input, Dependencies* dependencies) {
         case 't':
             get_dht11_data(dependencies->dht11, dependencies->serialCommunication, dependencies->tempInfo);
             break;
+        case 'm':
+            get_pm25_data(dependencies->pm25, dependencies->serialCommunication, dependencies->pm25Info);
         case 'p':
             test_input_output(dependencies->serialCommunication);
             break;
