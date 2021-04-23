@@ -13,12 +13,6 @@
 #ifndef AH_Actions
 #define AH_Actions
 
-#define action(name) void name(Dependencies* dependencies)
-#define use(name) auto name = dependencies->name;
-#define use_custom(name, custom_name) auto custom_name = dependencies->name;
-
-#define def_action(key, action) 0
-
 struct Dependencies {
     AuthouseLightPool *pool;
     SerialCommunication *serialCommunication;
