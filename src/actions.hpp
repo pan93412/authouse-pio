@@ -9,6 +9,7 @@
 #include "Modules/AuthouseLight/AuthouseLightPool.hpp"
 #include "Sensor/PM25/SHARP_GP2Y1014AU0F/SHGP2Y.hpp"
 #include "Sensor/Temperature/DHT11/DHT11.hpp"
+#include "configure.hpp"
 
 #ifndef AH_Actions
 #define AH_Actions

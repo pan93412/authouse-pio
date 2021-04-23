@@ -10,8 +10,11 @@
 #define use(name) auto name = dependencies->name;
 #define use_custom(name, custom_name) auto custom_name = dependencies->name;
 
-#define def_action(key, action) case key: \
-    action(dependencies); \
+/// Always enable this feature.
+const bool ALWAYS_ENABLE = true;
+
+#define def_action(key, action, flag) case key: \
+    if (flag) action(dependencies); \
     break;
 
 /** FOR USER MODIFICATION - START **/
@@ -71,11 +74,20 @@ action(get_pm25_data) {
 
 void action_loop(int input, Dependencies* dependencies) {
     switch (input) { // received...
-        def_action('e', enable_authouse_light)
-        def_action('d', disable_authouse_light)
-        def_action('t', get_dht11_data)
-        def_action('m', get_pm25_data)
-        def_action('p', test_input_output)
+
+        // def_action('key', action_name, flag)
+        //     key          the key to trigger the action
+        //     action_name  the action name that is defined above.
+        //     flag         make the action only available when flag == true
+        //                  you can add the flag in configure.hpp, and
+        //                  if you don't want this feature to be deactivated, use
+        //                  ALWAYS_ENABLE.
+
+        def_action('e', enable_authouse_light, LIGHT_SUPPORT)
+        def_action('d', disable_authouse_light, LIGHT_SUPPORT)
+        def_action('t', get_dht11_data, DHT11_SUPPORT)
+        def_action('m', get_pm25_data, SHGP2Y_SUPPORT)
+        def_action('p', test_input_output, ALWAYS_ENABLE)
 
 /** FOR USER MODIFICATION - END **/
 
