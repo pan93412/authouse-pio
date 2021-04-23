@@ -15,7 +15,8 @@ SHGP2YSensor* SHGP2YSensor::begin() {
 
 SHGP2YSensor* SHGP2YSensor::update() {
     int val = analogRead(this->pin);
-    this->info->raw = val;
+    this->info->raw = static_cast<float>(val);
+
     // NOLINTNEXTLINE
     if (this->info->raw > 36.455) {
         // NOLINTNEXTLINE

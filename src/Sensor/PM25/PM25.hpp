@@ -11,7 +11,7 @@
 #define AH_Sensor_PM25
 
 struct PM25Info {
-  float value;
+  float value = -1.0;
 };
 
 template <class T>

@@ -6,15 +6,16 @@
  */
 #include "actions.hpp"
 
-#define action(name) void name(Dependencies* dependencies)
-#define use(name) auto name = dependencies->name;
-#define use_custom(name, custom_name) auto custom_name = dependencies->name;
+#define action(name) void (name)(Dependencies* dependencies)  // NOLINT
+#define use(name) auto (name) = dependencies->name;  // NOLINT
+#define use_custom(name, custom_name) auto (custom_name) = dependencies->name;  // NOLINT
 
 /// Always enable this feature.
 const bool ALWAYS_ENABLE = true;
 
-#define def_action(key, action, flag) case key: \
-    if (flag) action(dependencies); \
+// NOLINTNEXTLINE
+#define def_action(key, action, flag) case (key): \
+    if (flag) (action)(dependencies); \
     break;
 
 /** FOR USER MODIFICATION - START **/
@@ -41,9 +42,9 @@ action(get_dht11_data) {
     use(tempInfo)
 
     dht11->update();
-    serialCommunication->postMessageNoNl("{\"temperature\": \"");
+    serialCommunication->postMessageNoNl(R"({"temperature": ")");
     serialCommunication->postMessageNoNl(String(tempInfo->temperature));
-    serialCommunication->postMessageNoNl("\", \"humidity\": \"");
+    serialCommunication->postMessageNoNl(R"(", "humidity": ")");
     serialCommunication->postMessageNoNl(String(tempInfo->humidity));
     serialCommunication->postMessage("\"}");
 };
