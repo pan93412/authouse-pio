@@ -6,7 +6,15 @@
  */
 #include "actions.hpp"
 
+#define action(name) void name(Dependencies* dependencies)
 #define use(name) auto name = dependencies->name;
+#define use_custom(name, custom_name) auto custom_name = dependencies->name;
+
+#define def_action(key, action) case key: \
+    action(dependencies); \
+    break;
+
+/** FOR USER MODIFICATION - START **/
 
 action(enable_authouse_light) {
     use(pool)
@@ -63,21 +71,14 @@ action(get_pm25_data) {
 
 void action_loop(int input, Dependencies* dependencies) {
     switch (input) { // received...
-        case 'e':
-            enable_authouse_light(dependencies);
-            break;
-        case 'd':
-            disable_authouse_light(dependencies);
-            break;
-        case 't':
-            get_dht11_data(dependencies);
-            break;
-        case 'm':
-            get_pm25_data(dependencies);
-            break;
-        case 'p':
-            test_input_output(dependencies->serialCommunication);
-            break;
+        def_action('e', enable_authouse_light)
+        def_action('d', disable_authouse_light)
+        def_action('t', get_dht11_data)
+        def_action('m', get_pm25_data)
+        def_action('p', test_input_output)
+
+/** FOR USER MODIFICATION - END **/
+
         default:
             break;
     }
