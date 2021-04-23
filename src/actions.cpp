@@ -54,6 +54,7 @@ void action_loop(int input, Dependencies* dependencies) {
             break;
         case 'm':
             get_pm25_data(dependencies->pm25, dependencies->serialCommunication, dependencies->pm25Info);
+            break;
         case 'p':
             test_input_output(dependencies->serialCommunication);
             break;

@@ -15,10 +15,14 @@ SHGP2YSensor* SHGP2YSensor::begin() {
 
 SHGP2YSensor* SHGP2YSensor::update() {
     int val = analogRead(this->pin);
+    // NOLINTNEXTLINE
     if (val > 36.455) {
+        // NOLINTNEXTLINE
         this->info->value = (float(val / 1024) - 0.0356) * 120000 * 0.035;
         this->info->working = true;
     } else {
         this->info->working = false;
     }
+
+    return this;
 }
