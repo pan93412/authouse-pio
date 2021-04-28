@@ -20,7 +20,9 @@ void setup() {
     // light pool
     if (LIGHT_SUPPORT) {
         dependencies->pool = AuthouseLightPool::getInstance();
-        dependencies->pool->add((new AuthouseLight{LED_BUILTIN})->initiate());
+        for (uint8_t i = 0; i < LIGHT_PORT_NUMBER; i++) {
+            dependencies->pool->add((new AuthouseLight{LIGHT_PORT[i]})->initiate());
+        }
     }
 
     // DHT11

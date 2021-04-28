@@ -26,4 +26,11 @@ const int DHT11_PORT = 4;
 /// The serial port that SHARP GP2Y1014AU0F used.
 const int SHGP2Y_PORT = 2;
 
+/// The lightbulb to be used on Authouse Light.
+const uint8_t LIGHT_PORT[] = { LED_BUILTIN, 13 };
+
+/// How many lightbulb will be used on Authouse Light?
+/// Usually be the entries count of LIGHT_PORT[]
+const uint8_t LIGHT_PORT_NUMBER = 2;
+
 #endif
