@@ -64,13 +64,13 @@ action(get_pm25_data) {
     use(serialCommunication)
 
     sensor->update();
-    serialCommunication->postMessageNoNl("{\"working\": ");
+    serialCommunication->postMessageNoNl(R"({"working": )");
     serialCommunication->postMessageNoNl(data->working ? "true" : "false");
-    serialCommunication->postMessageNoNl(", \"value\": ");
+    serialCommunication->postMessageNoNl(R"(, "value": ")");
     serialCommunication->postMessageNoNl(String(data->value));
-    serialCommunication->postMessageNoNl(", \"raw_value\": ");
+    serialCommunication->postMessageNoNl(R"(", "raw_value": ")");
     serialCommunication->postMessageNoNl(String(data->raw));
-    serialCommunication->postMessage("}");
+    serialCommunication->postMessage("\"}");
 }
 
 void action_loop(int input, Dependencies* dependencies) {
